@@ -60,22 +60,22 @@ print(duplicates_count)
 
 # get rid of 'Unnamed: 0' row
 
-josh = tracks.drop('Unnamed: 0', axis=1)
+tracks = tracks.drop('Unnamed: 0', axis=1)
 
-print(josh.iloc[1874] == josh.iloc[1925])
+print(tracks.iloc[1874] == tracks.iloc[1925])
 
-print(josh.info())
+print(tracks.info())
 
-df = josh.duplicated()
-print(josh[df])
+df = tracks.duplicated()
+print(tracks[df])
 print(df.sum())
 
 # then we should remove the duplicates
 
-josh = josh.drop_duplicates()
-duplicates = josh['track_id'].duplicated()
+tracks = tracks.drop_duplicates()
+duplicates = tracks['track_id'].duplicated()
 print("Rows with duplicates in 'track_id' column:")
-print((josh[duplicates])['track_name'])
+print((tracks[duplicates])['track_name'])
 
 ''' still have some duplicates because some songs are remixes, so they have different track IDs. Thus, it makes it harder to
 find these remixes and get rid of them. You could probably utilize regex's to do this, but for the purposes of this workshop, we'll just 
@@ -86,14 +86,14 @@ leave in the remixes. They shouldn't affect the model that much since there are 
 
 # check if there's any missing/NULL values. There are none! Go into what you should do if there are? 
 
-print(josh.isnull().sum())
+print(tracks.isnull().sum())
 
  
-josh.dropna(inplace = True)
+tracks.dropna(inplace = True)
 
 
 
-print(round((josh.isnull().sum()/josh.shape[0])*100,2))
+print(round((tracks.isnull().sum()/tracks.shape[0])*100,2))
 
 # handle outliers
 
